@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Android.StickerView", "Xamarin.Android.StickerView\Xamarin.Android.StickerView.csproj", "{DE4EB919-134F-40A4-A8B6-D4C6D2DD7F7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE4EB919-134F-40A4-A8B6-D4C6D2DD7F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE4EB919-134F-40A4-A8B6-D4C6D2DD7F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE4EB919-134F-40A4-A8B6-D4C6D2DD7F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE4EB919-134F-40A4-A8B6-D4C6D2DD7F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3414D176-D2B7-48EB-BB21-370A74FDB89F}
+	EndGlobalSection
+EndGlobal
