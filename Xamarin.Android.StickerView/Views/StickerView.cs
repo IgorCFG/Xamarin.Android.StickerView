@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using ActionMode = Xamarin.Android.StickerView.Abstractions.Enums.ActionMode;
 
-namespace Xamarin.Android.StickerView.Views.Customs
+namespace Xamarin.Android.StickerView.Views
 {
     public class StickerView : FrameLayout
     {
@@ -43,7 +43,6 @@ namespace Xamarin.Android.StickerView.Views.Customs
         private readonly Matrix _sizeMatrix = new Matrix();
         private readonly Matrix _downMatrix = new Matrix();
         private readonly Matrix _moveMatrix = new Matrix();
-
 
         private Sticker handlingSticker;
         private BitmapStickerIcon currentIcon;
@@ -105,11 +104,17 @@ namespace Xamarin.Android.StickerView.Views.Customs
 
         public StickerView(Context context) : base(context, null) { }
 
-        public StickerView(Context context, IAttributeSet attrs) 
-            : base(context, attrs, 0) => Initialize(context, attrs);
+        public StickerView(Context context, IAttributeSet attrs)
+            : base(context, attrs, 0)
+        {
+            Initialize(context, attrs);
+        }
 
-        public StickerView(Context context, IAttributeSet attrs, int defStyleAttr) 
-            : base(context, attrs, defStyleAttr) => Initialize(context, attrs, defStyleAttr);
+        public StickerView(Context context, IAttributeSet attrs, int defStyleAttr)
+            : base(context, attrs, defStyleAttr)
+        {
+            Initialize(context, attrs, defStyleAttr);
+        }
 
         #endregion
 
@@ -407,23 +412,6 @@ namespace Xamarin.Android.StickerView.Views.Customs
             sticker.GetMappedPoints(dst, _bounds);
         }
 
-        //public void Save(File file)
-        //{
-        //    try
-        //    {
-        //        StickerUtils.SaveImageToGallery(file, CreateBitmap());
-        //        StickerUtils.NotifySystemGallery(Context, file);
-        //    }
-        //    catch (IllegalArgumentException) 
-        //    {
-        //        //
-        //    } 
-        //    catch (IllegalStateException)
-        //    {
-        //        //
-        //    }
-        //}
-
         public Bitmap CreateBitmap()
         {
             handlingSticker = null;
@@ -432,7 +420,6 @@ namespace Xamarin.Android.StickerView.Views.Customs
             Draw(canvas);
             return bitmap;
         }
-
 
         public StickerView UpdateLocked(bool locked)
         {

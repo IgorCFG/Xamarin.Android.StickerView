@@ -3,7 +3,7 @@ using Android.Graphics.Drawables;
 using Android.Views;
 using Xamarin.Android.StickerView.Abstractions.Interfaces;
 using Xamarin.Android.StickerView.Utils;
-using StckerView = Xamarin.Android.StickerView.Views.Customs.StickerView;
+using StckerView = Xamarin.Android.StickerView.Views.StickerView;
 using Gravity = Xamarin.Android.StickerView.Abstractions.Enums.Gravity;
 
 namespace Xamarin.Android.StickerView.Models

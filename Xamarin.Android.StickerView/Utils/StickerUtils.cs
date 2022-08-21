@@ -1,4 +1,7 @@
-﻿using Android.Graphics;
+﻿using Android.Content;
+using Android.Graphics;
+using Android.Util;
+using Android.Views.InputMethods;
 using System;
 using Xamarin.Essentials;
 
@@ -43,6 +46,17 @@ namespace Xamarin.Android.StickerView.Utils
             if (context == null) return 0f;
 
             return scaledPixels * context.Resources.DisplayMetrics.ScaledDensity;
+        }
+
+        public static float ConvertPxToDp(float pixels)
+        {
+            var context = Platform.AppContext;
+            if (context == null) return 0f;
+
+            return TypedValue.ApplyDimension(
+                ComplexUnitType.Sp,
+                pixels,
+                context.Resources.DisplayMetrics);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Android.Views;
 using Xamarin.Android.StickerView.Abstractions.Interfaces;
-using StckerView = Xamarin.Android.StickerView.Views.Customs.StickerView;
+using StckerView = Xamarin.Android.StickerView.Views.StickerView;
 
 namespace Xamarin.Android.StickerView.Events
 {

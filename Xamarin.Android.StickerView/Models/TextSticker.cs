@@ -20,6 +20,7 @@ namespace Xamarin.Android.StickerView.Models
 
         private static readonly string ellipsis = "\u2026";
 
+        private readonly float _screenWidth, _screenHeight;
         private readonly Rect _realBounds;
         private readonly Rect _textRect;
         private readonly TextPaint _textPaint;
@@ -64,9 +65,11 @@ namespace Xamarin.Android.StickerView.Models
             get => text;
             set {
                 text = value;
-                ResizeText();
+                OnTextChanged?.Invoke();
             }
         }
+
+        public Action OnTextChanged { get; set; }
 
         #endregion
 
@@ -74,7 +77,7 @@ namespace Xamarin.Android.StickerView.Models
 
         public TextSticker(Context context): this(context, null) { }
 
-        public TextSticker(Context context, Drawable drawable)
+        public TextSticker(Context context, Drawable drawable, bool useScreenSize = false)
         {
             this.drawable = drawable;
 
@@ -85,12 +88,31 @@ namespace Xamarin.Android.StickerView.Models
             MinTextSizePixels = StickerUtils.ConvertSpToPx(DEFAULT_MIN_TEXT_SIZE);
             MaxTextSizePixels = StickerUtils.ConvertSpToPx(DEFAULT_MAX_TEXT_SIZE);
 
+            _screenWidth = useScreenSize 
+                ? context.Resources.DisplayMetrics.WidthPixels
+                : drawable.IntrinsicWidth;
+
+            _screenHeight = useScreenSize
+                ? context.Resources.DisplayMetrics.HeightPixels
+                : drawable.IntrinsicHeight;
+
             _textPaint = new TextPaint(PaintFlags.AntiAlias);
-            _realBounds = new Rect(0, 0, GetWidth(), GetHeight());
-            _textRect = new Rect(0, 0, GetWidth(), GetHeight());
+
+            _realBounds = new Rect(
+                0,
+                0,
+                GetWidth(), 
+                GetHeight());
+
+            _textRect = new Rect(
+                0,
+                0,
+                GetWidth(),
+                GetHeight());
+
             _textPaint.TextSize = MaxTextSizePixels;
 
-            alignment = Layout.Alignment.AlignCenter;
+            alignment = Layout.Alignment.AlignNormal;
         }
 
         #endregion
@@ -115,7 +137,6 @@ namespace Xamarin.Android.StickerView.Models
 
             if (_textRect.Width() == GetWidth())
             {
-                //var dy = GetHeight() / 2 - staticLayout?.Height ?? 0 / 2;
                 canvas.Translate(0, 0);
             }
             else
@@ -129,9 +150,9 @@ namespace Xamarin.Android.StickerView.Models
             canvas.Restore();
         }
 
-        public override int GetHeight() => drawable.IntrinsicHeight;
+        public override int GetHeight() => (int)_screenHeight;
 
-        public override int GetWidth() => drawable.IntrinsicWidth;
+        public override int GetWidth() => (int)_screenWidth;
 
         public override Sticker SetAlpha(int alpha)
         {
@@ -166,7 +187,7 @@ namespace Xamarin.Android.StickerView.Models
 
             // Safety check
             // (Do not resize if the view does not have dimensions or if there is no text)
-            if (string.IsNullOrWhiteSpace(text)
+            if (text == null
                 || availableHeightPixels <= 0
                 || availableWidthPixels <= 0
                 || MaxTextSizePixels <= 0)
@@ -174,8 +195,8 @@ namespace Xamarin.Android.StickerView.Models
                 return this;
             }
 
-            float targetTextSizePixels = MaxTextSizePixels;
-            int targetTextHeightPixels =
+            var targetTextSizePixels = MaxTextSizePixels;
+            var targetTextHeightPixels =
                 GetTextHeightPixels(text, availableWidthPixels, targetTextSizePixels);
 
             // Until we either fit within our TextView

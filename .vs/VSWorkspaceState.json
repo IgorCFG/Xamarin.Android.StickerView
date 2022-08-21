@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Xamarin.Android.StickerView"
+    "\\Xamarin.Android.StickerView",
+    "\\Xamarin.Android.StickerView\\Views"
   ],
-  "SelectedNode": "\\Xamarin.Android.StickerView\\Xamarin.Android.StickerView.sln",
+  "SelectedNode": "\\Xamarin.Android.StickerView.sln",
   "PreviewInSolutionExplorer": false
 }
